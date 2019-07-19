@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { SearchType, RandomApiService } from '../Services/random-api.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +9,18 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+results: Observable<any>;
+searchTerm: string ='';
+type: SearchType = SearchType.all;
+  constructor(private randomApi: RandomApiService) {}
+
+
+  CargarDetalle(){
+      this.results = this.randomApi.GetDetails();
+  }
+  
+
+
 
 }
+
