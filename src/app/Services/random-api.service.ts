@@ -13,21 +13,25 @@ export enum SearchType{
   providedIn: 'root'
 })
 export class RandomApiService {
-url = 'https://randomuser.me/api/';
+url = 'https://randomuser.me/api/1.2/';
   constructor(private http: HttpClient) {} 
-    SearchData(Title: string, Type: SearchType): Observable<any>{
-        return this.http.get('${this.url}')
-        .pipe(map (results => {
-          console.log('RAW: ', results);
-          return results['Search'] ;
-        })
-          //map (results => results['Search'])
+    SearchData(): Observable<any>{
+        return this.http.get('${this.url}?results=10')
+        .pipe(map (results => results
+        )
+          //
         )
     }
 
     GetDetails(): Observable<any>{
       console.log
-       return this.http.get('${this.url}');
+       return this.http.get('${this.url}?results=10').pipe(
+        map (results => {
+          console.log('Raw: ', results);                  
+          return results['Search']
+          
+        })
+       );
      
     }
   
